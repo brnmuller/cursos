@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Dicionário de nomes brasileiros traduzidos para Quenya e Sindarin, os idiomas élficos de J.R.R. Tolkien. Baseado nos 100 nomes mais populares do Brasil (IBGE Censo 2022).">
+<meta property="og:title" content="Nomes Élficos — Dicionário Quenya & Sindarin">
+<meta property="og:description" content="Descubra como seu nome soa no idioma dos Elfos de Tolkien.">
+<title>Nomes Élficos — Dicionário Quenya & Sindarin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink:       #1a1714;
+    --ink-2:     #3d3830;
+    --ink-3:     #6b6459;
+    --ink-4:     #9b9189;
+    --parch:     #f5f0e8;
+    --parch-2:   #ede7d8;
+    --parch-3:   #e2d9c8;
+    --gold:      #8a6a2e;
+    --gold-light:#b8912e;
+    --gold-bg:   #f9f3e4;
+    --teal:      #1d5c4e;
+    --teal-light:#2a7a67;
+    --teal-bg:   #eaf4f1;
+    --rule:      rgba(26,23,20,.12);
+    --radius:    10px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--ink);
+    background: var(--parch);
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  .site-header {
+    background: var(--ink);
+    color: var(--parch);
+    text-align: center;
+    padding: 3.5rem 1.5rem 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .site-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg, transparent, transparent 39px, rgba(255,255,255,.03) 40px
+    ), repeating-linear-gradient(
+      90deg, transparent, transparent 59px, rgba(255,255,255,.03) 60px
+    );
+    pointer-events: none;
+  }
+  .header-rune {
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    letter-spacing: .35em;
+    color: var(--gold-light);
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
+    display: block;
+  }
+  .site-header h1 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    font-weight: 600;
+    letter-spacing: .04em;
+    color: var(--parch);
+    line-height: 1.15;
+    margin-bottom: .6rem;
+  }
+  .site-header h1 em {
+    color: var(--gold-light);
+    font-style: normal;
+  }
+  .header-sub {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.05rem;
+    color: rgba(245,240,232,.65);
+    font-style: italic;
+    max-width: 520px;
+    margin: 0 auto 1.8rem;
+  }
+  .header-divider {
+    width: 80px;
+    height: 1px;
+    background: var(--gold);
+    margin: 0 auto 1.4rem;
+  }
+  .header-meta {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    letter-spacing: .08em;
+    color: rgba(245,240,232,.4);
+    text-transform: uppercase;
+  }
+
+  /* ── CONTROLS ── */
+  .controls-bar {
+    background: var(--parch-2);
+    border-bottom: 1px solid var(--rule);
+    padding: 1rem 1.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .controls-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .search-wrap {
+    flex: 1;
+    min-width: 200px;
+    position: relative;
+  }
+  .search-wrap svg {
+    position: absolute;
+    left: 11px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--ink-4);
+    width: 16px;
+    height: 16px;
+    pointer-events: none;
+  }
+  #search {
+    width: 100%;
+    padding: 9px 12px 9px 34px;
+    border: 1px solid var(--parch-3);
+    border-radius: var(--radius);
+    background: var(--parch);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: var(--ink);
+    outline: none;
+    transition: border-color .15s;
+  }
+  #search:focus { border-color: var(--gold); }
+  #search::placeholder { color: var(--ink-4); font-style: italic; }
+  .filters { display: flex; gap: 6px; }
+  .fbtn {
+    padding: 7px 16px;
+    border: 1px solid var(--parch-3);
+    border-radius: var(--radius);
+    background: transparent;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: var(--ink-3);
+    cursor: pointer;
+    transition: all .15s;
+    white-space: nowrap;
+  }
+  .fbtn:hover { background: var(--parch-3); color: var(--ink); }
+  .fbtn.active { background: var(--ink); color: var(--parch); border-color: var(--ink); }
+
+  /* ── STATS ── */
+  .stats-row {
+    max-width: 900px;
+    margin: 1.2rem auto;
+    padding: 0 1.5rem;
+    display: flex;
+    gap: 8px;
+    font-family: 'Inter', sans-serif;
+  }
+  .stat {
+    background: var(--parch-2);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 8px 14px;
+    flex: 1;
+    text-align: center;
+  }
+  .stat-n { font-size: 20px; font-weight: 500; color: var(--ink); display: block; }
+  .stat-l { font-size: 11px; color: var(--ink-4); letter-spacing: .04em; }
+
+  /* ── MAIN GRID ── */
+  .main { max-width: 900px; margin: 0 auto; padding: 0 1.5rem 4rem; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+
+  /* ── CARD ── */
+  .card {
+    background: var(--parch);
+    border: 1px solid var(--parch-3);
+    border-radius: var(--radius);
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color .2s, box-shadow .2s;
+  }
+  .card:hover { border-color: var(--gold); box-shadow: 0 2px 12px rgba(138,106,46,.12); }
+  .card.open { border-color: var(--ink-2); }
+  .card-head { padding: 15px 16px 13px; }
+  .card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 10px;
+  }
+  .card-br {
+    font-family: 'Cinzel', serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: .02em;
+  }
+  .card-rank {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    color: var(--ink-4);
+    background: var(--parch-2);
+    border: 1px solid var(--rule);
+    padding: 2px 7px;
+    border-radius: 99px;
+    letter-spacing: .04em;
+    margin-top: 2px;
+  }
+  .badge {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    padding: 3px 9px;
+    border-radius: 99px;
+    font-weight: 500;
+    letter-spacing: .04em;
+  }
+  .badge-m { background: #e8f0f8; color: #1a3a5c; border: 1px solid #b8cfe0; }
+  .badge-f { background: #f8eaf0; color: #5c1a3a; border: 1px solid #e0b8cf; }
+  .lang-row { display: flex; gap: 10px; }
+  .lang-block { flex: 1; }
+  .lang-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+  .lang-label.lq { color: var(--gold); }
+  .lang-label.ls { color: var(--teal); }
+  .lang-name { font-size: 15px; font-style: italic; }
+  .lang-name.lq { color: var(--gold); }
+  .lang-name.ls { color: var(--teal); }
+  .expand-row {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--ink-4);
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    user-select: none;
+  }
+  .expand-row svg { transition: transform .2s; width: 12px; height: 12px; }
+  .card.open .expand-row svg { transform: rotate(180deg); }
+
+  /* ── CARD BODY ── */
+  .card-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .35s ease;
+  }
+  .card.open .card-body { max-height: 800px; }
+  .card-body-inner {
+    border-top: 1px solid var(--rule);
+    padding: 14px 16px 16px;
+    background: var(--gold-bg);
+  }
+  .detail-section { margin-bottom: 13px; }
+  .detail-section:last-child { margin-bottom: 0; }
+  .detail-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--ink-4);
+    margin-bottom: 4px;
+  }
+  .detail-text {
+    font-size: 14.5px;
+    color: var(--ink-2);
+    line-height: 1.6;
+  }
+  .roots { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 5px; }
+  .root-pill {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    padding: 3px 9px;
+    border-radius: 99px;
+  }
+  .root-pill.rq { background: #faf3e0; color: var(--gold); border: 1px solid #d4b870; }
+  .root-pill.rs { background: var(--teal-bg); color: var(--teal); border: 1px solid #7bbdaf; }
+
+  /* ── EMPTY ── */
+  .empty {
+    grid-column: 1/-1;
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--ink-4);
+    font-style: italic;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    color: rgba(245,240,232,.5);
+    text-align: center;
+    padding: 2.5rem 1.5rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    line-height: 1.8;
+    letter-spacing: .03em;
+  }
+  footer a { color: var(--gold-light); text-decoration: none; }
+  footer strong { color: rgba(245,240,232,.8); font-weight: 500; }
+
+  @media (max-width: 600px) {
+    .stats-row { flex-wrap: wrap; }
+    .stat { min-width: calc(50% - 4px); }
+    .grid { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .card, .card-body, .expand-row svg { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <span class="header-rune">Quenta Lambëo · Cuentas dos Nomes</span>
+  <h1>Nomes <em>Élficos</em></h1>
+  <p class="header-sub">Os 100 nomes mais populares do Brasil reconstruídos em Quenya e Sindarin, os idiomas imortais de J.R.R. Tolkien</p>
+  <div class="header-divider"></div>
+  <span class="header-meta">Baseado no Censo Demográfico 2022 · IBGE</span>
+</header>
+
+<div class="controls-bar">
+  <div class="controls-inner">
+    <div class="search-wrap">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="text" id="search" placeholder="Buscar por nome, Quenya, Sindarin ou significado…" oninput="render()" aria-label="Buscar nomes">
+    </div>
+    <div class="filters">
+      <button class="fbtn active" onclick="setFilter('todos',this)">Todos</button>
+      <button class="fbtn" onclick="setFilter('M',this)">Masculinos</button>
+      <button class="fbtn" onclick="setFilter('F',this)">Femininos</button>
+    </div>
+  </div>
+</div>
+
+<div class="stats-row" id="stats-row">
+  <div class="stat"><span class="stat-n" id="s-total">0</span><span class="stat-l">total</span></div>
+  <div class="stat"><span class="stat-n" id="s-masc">0</span><span class="stat-l">masculinos</span></div>
+  <div class="stat"><span class="stat-n" id="s-fem">0</span><span class="stat-l">femininos</span></div>
+  <div class="stat"><span class="stat-n" id="s-found">0</span><span class="stat-l">encontrados</span></div>
+</div>
+
+<main class="main">
+  <div class="grid" id="grid" role="list"></div>
+</main>
+
+<footer>
+  <strong>Nomes Élficos</strong> · Dicionário Quenya &amp; Sindarin<br>
+  Traduções baseadas nas raízes linguísticas de J.R.R. Tolkien compiladas em<br>
+  <em>The Etymologies</em> (1987), <em>The Silmarillion</em> (1977) e <em>Parma Eldalamberon</em><br><br>
+  Ranking de nomes: <a href="https://censo2022.ibge.gov.br/nomes" target="_blank" rel="noopener">IBGE Censo Demográfico 2022</a>
+</footer>
+
+<script>
+const N=[
+  // ── MASCULINOS (top 50 IBGE Censo 2022) ──
+  {br:"José",rank:1,g:"M",q:"Calacáno",s:"Calagorn",
+   etym:"Do hebraico Yosef (יוסף): yasaf, 'acrescentar, Deus multiplica'. Nome do patriarca bíblico, filho de Jacó.",
+   logic:"A provisão e multiplicação divina foram transpostas via CAL- (luz que revela e provê) + CÁNO (aquele que guia e administra). Em Sindarin, CALA- (luz) + GORN (vigoroso, firme na missão).",
+   rq:"CAL (luz/provisão) + CÁNO (guia)",rs:"CALA (luz) + GORN (firme)"},
+  {br:"João",rank:2,g:"M",q:"Eruanna",s:"Eruion",
+   etym:"Do hebraico Yohanan (יוחנן): YHWH + hanan, 'ser gracioso'. Significa 'Eru/Javé é gracioso'. Um dos nomes mais difundidos do mundo cristão.",
+   logic:"YHWH → Eru (o Único de Tolkien). ANNA (dádiva, graça em Quenya) traduz literalmente o hanan hebraico. Convergência real entre os dois lexicons. Em Sindarin, ION (filho/herdeiro) capta a filiação espiritual divina.",
+   rq:"ERU (o Único) + ANNA (graça/dádiva)",rs:"ERU + ION (filho herdeiro)"},
+  {br:"Antônio",rank:3,g:"M",q:"Arafinwë",s:"Arfin",
+   etym:"Do grego Antónios, de origem etrusca incerta. Tradição associa ao latim ante (antes) ou ao sentido de 'inestimável'. Nome da família romana Antônia.",
+   logic:"Nobreza patricia romana → AR- (nobre em Quenya) + FINWË (habilidoso, nome do rei Noldor de Valinor). 'Nobre e habilidoso'. Em Sindarin, AR + FIN reduzem a fórmula ao essencial.",
+   rq:"AR (nobre) + FINWË (habilidoso)",rs:"AR (nobre) + FIN (habilidade)"},
+  {br:"Francisco",rank:4,g:"M",q:"Ailinwë",s:"Aelin",
+   etym:"Do latim Franciscus: 'o Franco', homem livre de povo germânico. Raiz franca-frankish. São Francisco de Assis popularizou o nome no mundo cristão medieval.",
+   logic:"Francos eram povo do movimento e das margens livres — daí AIL- (lago em movimento, liberdade fluída) + INWË (sufixo nobre, como o rei Vanyar Ingwë). Em Sindarin, AELIN (lago, amplidão livre e sem fronteiras).",
+   rq:"AIL (água livre/lago) + INWË (nobre)",rs:"AELIN (lago, liberdade)"},
+  {br:"Carlos",rank:5,g:"M",q:"Cánirmo",s:"Caun",
+   etym:"Do germânico Karl: homem adulto e livre. Raiz comum com inglês churl, alemão Kerl. Popularizado por Carlos Magno como símbolo do governante que serve ao povo.",
+   logic:"CÁNO (voz de comando, liderança pela palavra) + IRMO (senhor, espírito soberano — um dos Valar). Em Sindarin, CAUN (príncipe, nobre) capta a dignidade régia diretamente.",
+   rq:"CÁNO (voz/líder) + IRMO (senhor-espírito)",rs:"CAUN (príncipe/nobre)"},
+  {br:"Paulo",rank:6,g:"M",q:"Pitycáno",s:"Pithan",
+   etym:"Do latim Paulus: 'pequeno', 'de baixa estatura'. Nome de família romana. São Paulo abraçou o nome como emblema de humildade apostólica — 'o menor dos apóstolos'.",
+   logic:"PITY- (pequeno em Quenya, como nos Pityafindë) + CÁNO (líder — a humildade que paradoxalmente lidera). Em Sindarin, PITHAN condensa PETH + AN em forma onomástica elegante.",
+   rq:"PITY (pequeno) + CÁNO (líder humilde)",rs:"PITH (pequeno/palavra) + AN"},
+  {br:"Pedro",rank:7,g:"M",q:"Ondoher",s:"Gondor",
+   etym:"Do grego Petros (Πέτρος): petra, rocha. Tradução do aramaico Kefas, apelido dado por Jesus a Simão. Significa 'pedra, rochedo, fundação'.",
+   logic:"Pedra → ONDO (pedra em Quenya, material dos Noldor construtores). HER (senhor, aquele que ergue sobre a pedra). Em Sindarin, GOND (pedra) + OR (sobre/acima) = Gondor — o próprio nome do reino de Tolkien.",
+   rq:"ONDO (pedra) + HER (senhor)",rs:"GOND (pedra) + OR (sobre)"},
+  {br:"Lucas",rank:8,g:"M",q:"Calamírë",s:"Calmir",
+   etym:"Do latim Lucas/Lucius: lux/lucis, luz. Nome de origem romana diretamente etimológico. Lucas evangelista, autor do terceiro evangelho e dos Atos.",
+   logic:"Luz → CAL- (luz em Quenya, raiz fundamental de Calaquendi, Elfos da Luz). MÍRË (joia preciosa) eleva a luz à categoria de tesouro vivo. Em Sindarin, CALMIR é forma atestada como portador de luz.",
+   rq:"CAL (luz) + MÍRË (joia preciosa)",rs:"CAL (luz) + MIR (joia)"},
+  {br:"Luís",rank:9,g:"M",q:"Glornyel",s:"Glorfindel",
+   etym:"Do germânico Chlodwig: hlud (famoso, glorioso) + wig (guerreiro). Evoluiu para Ludwig, Louis, Luís. Dezoito reis da França levaram o nome.",
+   logic:"Glória guerreira → GLOR- (glória/ouro radiante em Quenya) + NYEL (soante, figura que ressoa pela história). Glorfindel é o grande herói élfico de Valinor e Gondolin — arquétipo do nome.",
+   rq:"GLOR (glória/ouro) + NYEL (soante)",rs:"GLOR (glória) + FINDEL (crina dourada)"},
+  {br:"Marcos",rank:10,g:"M",q:"Ohtaron",s:"Daeron",
+   etym:"Do latim Marcus, ligado a Mars, deus romano da guerra. Nome clássico de virilidade e marcialidade. Marco Evangelista, fundador da Igreja de Alexandria.",
+   logic:"Mars → OHTA- (guerra em Quenya). -RON é sufixo masculino de agente (o que pratica a ação). Em Sindarin, DAER (grande/sombrio como Marte) + ON recria o peso marcial com ressonância tolkieniana.",
+   rq:"OHTA (guerra) + RON (agente masculino)",rs:"DAER (grande/sombrio) + ON"},
+  {br:"Gabriel",rank:12,g:"M",q:"Manvecáno",s:"Manwethon",
+   etym:"Do hebraico Gavriél (גַּבְרִיאֵל): Gever (homem forte/herói) + El (Deus). Significa 'herói de Deus', 'Deus é minha força'. Arcanjo mensageiro.",
+   logic:"El → Manwë (rei dos Valar, senhor dos céus). CÁNO (mensageiro-líder que proclama) traduz o papel de Gabriel como arauto divino. THON em Sindarin é sufixo de força masculina.",
+   rq:"MANWË (rei Valar) + CÁNO (mensageiro)",rs:"MANWË + THON (força masculina)"},
+  {br:"Rafael",rank:13,g:"M",q:"Erutuivëon",s:"Eruthiel",
+   etym:"Do hebraico Rafa'el (רָפָאֵל): Rafa (curar, sanar) + El (Deus). Significa 'Deus cura', 'a cura vem do divino'. Arcanjo da medicina e das viagens.",
+   logic:"Cura divina: ERU (o Único) + TUIVË (renovação, rebrotamento, o ato de reviver) → 'aquele que carrega em si a força regenerativa de Eru'. Em Sindarin, THIEL (cura radiante) + sufixo ON para masculino.",
+   rq:"ERU (o Único) + TUIVË (renovação/cura)",rs:"ERU + THIEL (cura radiante)"},
+  {br:"Daniel",rank:14,g:"M",q:"Erutuivë",s:"Eruithil",
+   etym:"Do hebraico Daniyél (דָּנִיֵּאל): Din (julgamento) + El (Deus). Significa 'Deus é meu juiz', 'julgado por Eru'. Profeta bíblico na corte babilônica.",
+   logic:"El hebraico → Eru tolkieniano. O julgamento foi expandido para providência: TUIVË (broto, renovação que o julgamento divino produz). Em Sindarin, ITHIL (lua, símbolo de clareza/julgamento) + sufixo.",
+   rq:"ERU (o Único) + TUIVË (broto/providência)",rs:"ERU + ITHIL (lua/julgamento)"},
+  {br:"Marcelo",rank:15,g:"M",q:"Ohtaturë",s:"Daerondir",
+   etym:"Do latim Marcellus: diminutivo de Marcus. Significa 'pequeno guerreiro', 'jovem dedicado a Marte'. Nome de vários papas e mártires da Igreja.",
+   logic:"Guerreiro jovem → OHTA- (guerra) + TURË (habilidade/destreza, oposta à força bruta — o guerreiro jovem é veloz e hábil). Em Sindarin, DAER + ONDIR (jovem, aprendiz) recria o diminutivo marcial.",
+   rq:"OHTA (guerra) + TURË (habilidade)",rs:"DAER (marcial) + ONDIR (jovem)"},
+  {br:"Bruno",rank:16,g:"M",q:"Móricáno",s:"Morchant",
+   etym:"Do germânico Brun: marrom escuro, cor de urso ou de terra húmus. Nome de origem franca, popular entre guerreiros medievais do norte europeu.",
+   logic:"Mori- (escuro/sombrio em Quenya) traduz diretamente o sentido cromático. Cáno (líder audaz) adiciona a valência guerreira medieval. Em Sindarin, MOR (escuro) + CHANT (modelador, artífice) — o sombrio que molda.",
+   rq:"MORI (sombra escura) + CÁNO (líder)",rs:"MOR (escuro) + CHANT (modelador)"},
+  {br:"Eduardo",rank:17,g:"M",q:"Ornórë",s:"Galadorn",
+   etym:"Do inglês antigo Eadweard: ead (riqueza, bênção) + weard (guardião). Significa 'guardião da riqueza' ou 'protetor das bênçãos do lar'. Nome de vários reis ingleses.",
+   logic:"Guardião do lar/riqueza → ORN- (árvore enraizada, símbolo do lar permanente) + ÓRE (coração interior, núcleo protetor). Em Sindarin, GALADH (árvore/lar) + ORN reforçam o enraizamento doméstico.",
+   rq:"ORN (árvore/permanência) + ÓRE (coração)",rs:"GALADH (árvore) + ORN (torre)"},
+  {br:"Felipe",rank:18,g:"M",q:"Roccossë",s:"Rochon",
+   etym:"Do grego Phílippos (Φίλιππος): phílos (amigo) + híppos (cavalo). Significa 'amigo dos cavalos'. Nome macedônio aristocrático — Felipe II, pai de Alexandre Magno.",
+   logic:"Híppos → ROC- (cavalo em Quenya, a raiz dos Rohirrim vem daqui). Amizade absorvida por -OSSË (companheiro fiel das profundezas). Em Sindarin, ROCHON é precisamente 'cavaleiro, amante de cavalos'.",
+   rq:"ROC (cavalo) + OSSË (companheiro fiel)",rs:"ROCHON (cavaleiro)"},
+  {br:"Raimundo",rank:19,g:"M",q:"Haryandur",s:"Haradur",
+   etym:"Do germânico Ragnemundus: ragin (conselho/sabedoria) + mund (proteção). Significa 'sábio protetor' ou 'aquele que protege com seus conselhos'.",
+   logic:"Conselho + proteção: HARAN (senhor/rei, aquele a quem se presta conselho) + DUR (servo-protetor fiel). 'Aquele que serve o senhor com sabedoria'. Em Sindarin, HARAD + DUR mantém o mesmo eixo semântico.",
+   rq:"HARAN (senhor) + DUR (servo protetor)",rs:"HARAD (domínio) + DUR (servo)"},
+  {br:"Rodrigo",rank:20,g:"M",q:"Hrónarwë",s:"Hrodnir",
+   etym:"Do germânico Hroderich: hrod (glória) + ric (poder, reino). Significa 'poderoso na glória' ou 'rei glorioso'. Rodrigo foi o último rei visigótico da Hispânia.",
+   logic:"Glória + poder real: HRÓ (evocação fonética honesta de hrod) + NARWË (poder ardente, como a chama da fama). Em Sindarin, HROD + NIR (força/vontade inabalável) recria o eixo glória-poder.",
+   rq:"HRÓ (glória sonora) + NARWË (poder ardente)",rs:"HROD (glória) + NIR (força)"},
+  {br:"Manoel",rank:21,g:"M",q:"Erumanëa",s:"Erumaen",
+   etym:"Do hebraico Immanu-El: immanu (conosco) + El (Deus). Significa 'Deus conosco'. Nome profético de Isaías 7:14, aplicado ao Messias na tradição cristã.",
+   logic:"El → Eru. O senso de presença divina entre os mortais: ERU + MANËA (próximo, presente, aquele que habita entre nós — raiz de mana/espírito presente). Em Sindarin, ERU + MAEN (habilidoso/presente).",
+   rq:"ERU (o Único) + MANËA (presente/próximo)",rs:"ERU + MAEN (habilidoso/presente)"},
+  {br:"Mateus",rank:22,g:"M",q:"Erumatardë",s:"Erumaethor",
+   etym:"Do hebraico Mattityahu (מַתִּתְיָהוּ): Mattan (dom, presente) + YHWH. Significa 'dádiva de Deus'. Apóstolo e evangelista.",
+   logic:"Dom divino: ERU + MATAR (sustentar, receber alimento/dom em Quenya — raiz de 'comer' como ato de receber vida). Em Sindarin, MAETHOR (guerreiro, mas também 'aquele que usa o dom com destreza').",
+   rq:"ERU (o Único) + MATAR (receber o dom)",rs:"ERU + MAETHOR (usuário do dom)"},
+  {br:"André",rank:23,g:"M",q:"Vorondo",s:"Bregolas",
+   etym:"Do grego Andréas, derivado de anér/andrós (homem, varão, viril). Evoca coragem e excelência masculina. Apóstolo, irmão de Pedro.",
+   logic:"Valentia > literalidade. VORON- (fidelidade persistente, raiz de Voronwë o elfo mensageiro) + DO (sufixo de agente). Em Sindarin, BREG (bravo, veloz) + LAS (ouvinte/légua) nomeia o arquétipo do corajoso.",
+   rq:"VORON (fidelidade) + DO (agente)",rs:"BREG (bravo) + LAS (légua/ouvinte)"},
+  {br:"Fernando",rank:24,g:"M",q:"Turucáno",s:"Turgon",
+   etym:"Do germânico Frid-nand: frithu (paz) + nand (audaz, pronto para a ação). Significa 'audaz na paz' ou 'corajoso para estabelecer a paz'.",
+   logic:"Valência guerreira dominante na cultura lusófona → TURU- (força física, vigor) + CÁNO (líder audaz). Turgon é o famoso rei élfico de Gondolin — nome com o mesmo peso semântico exato.",
+   rq:"TURU (força) + CÁNO (líder audaz)",rs:"TUR (poder) + GON (senhor de pedra)"},
+  {br:"Fábio",rank:25,g:"M",q:"Faivorno",s:"Faevor",
+   etym:"Do latim Fabius: nome de família romana ligado a faba (fava, feijão). A gens Fabia era uma das mais nobres de Roma. Associado a 'o cultivador'.",
+   logic:"Cultivador nobre → FAI- (espírito, alma sensível em Quenya — a nobreza interior) + VORNO (sufixo de fidelidade enraizada). Em Sindarin, FAE (espírito/alma) + VOR (fiel) = 'alma fiel'.",
+   rq:"FAI (espírito/alma) + VORNO (fiel enraizado)",rs:"FAE (espírito) + VOR (fiel)"},
+  {br:"Leonardo",rank:26,g:"M",q:"Taurossë",s:"Taurdor",
+   etym:"Do germânico Leonhard: leo (leão, absorvido do latim) + hard (forte, corajoso). Significa 'leão corajoso'. Leonardo da Vinci e Leonardo de Caprio.",
+   logic:"Leão → TAUR- (floresta/soberania em Quenya — o leão reina na savana como Taur na floresta). OSSË (força das águas, energia natural das profundezas). Em Sindarin, TAUR + DOR (terra, senhor da terra).",
+   rq:"TAUR (soberania/floresta) + OSSË (força natural)",rs:"TAUR (floresta/rei) + DOR (terra)"},
+  {br:"Gustavo",rank:27,g:"M",q:"Arcastë",s:"Archas",
+   etym:"Do nórdico Gautr-stafr: Gautr (povo godo/deus Odin) + stafr (cetro, apoio). Significa 'cetro dos Gautos' ou 'pilar do povo gótico'.",
+   logic:"Cetro real → AR- (nobre) + CASTË (instrumento de poder, ferramenta de governo). Em Sindarin, AR + CHAS (penhasco, símbolo de firmeza — o pilar que não cede).",
+   rq:"AR (nobre) + CASTË (instrumento de poder)",rs:"AR (nobre) + CHAS (penhasco firme)"},
+  {br:"Guilherme",rank:28,g:"M",q:"Voromindë",s:"Vorimind",
+   etym:"Do germânico Wilhelm: willo (vontade, determinação) + helm (capacete, proteção). Significa 'protetor determinado' ou 'vontade de proteção'. Guilherme o Conquistador.",
+   logic:"Proteção + determinação: VORO- (fidelidade constante, proteção inabalável) + MINDË (torre, cume que protege o horizonte). Em Sindarin, VOR + IMIND recria a fortaleza da vontade.",
+   rq:"VORO (fidelidade) + MINDË (torre protetora)",rs:"VOR (fiel) + IMIND (torre/vontade)"},
+  {br:"Leandro",rank:29,g:"M",q:"Taurelindo",s:"Taurdolin",
+   etym:"Do grego Leándros: léon (leão) + anér (homem). Significa 'homem-leão' ou 'leão entre homens'. Herói da mitologia grega, amante de Hero.",
+   logic:"Leão + homem → TAUR- (soberania leonina) + ELINDO (aquele que canta/vaga como um elfo, símbolo do espírito livre do herói mítico). Em Sindarin, TAUR + DOLIN (vale melódico, evocando o pathos da história).",
+   rq:"TAUR (soberania) + ELINDO (cantor/viajante)",rs:"TAUR (floresta) + DOLIN (vale melódico)"},
+  {br:"Tiago",rank:30,g:"M",q:"Iacobor",s:"Iacob",
+   etym:"Do hebraico Yaakov (יַעֲקֹב): akev (calcanhar). Jacó agarrou o calcanhar de Esaú. Significa 'aquele que segue de perto' ou 'o substituto'.",
+   logic:"IACOB (transliteração honesta da raiz hebraica — Tolkien usou transliterações bíblicas em seu universo) + OR (sufixo Q. de agente). A substituição é aceita; IACOB em Sindarin permanece coerente.",
+   rq:"IACOB (raiz hebraica honesta) + OR (agente)",rs:"IACOB (transliteração Sindarin)"},
+  {br:"Anderson",rank:31,g:"M",q:"Eldarion",s:"Eledirn",
+   etym:"Do inglês Anderson: son of Andrew (filho de André). Andrew do grego Andréas (homem viril). Um patronímico anglossaxão.",
+   logic:"Filho de homem valente → ELDAR (plural de Elda, o povo que caminha) + ION (filho, herdeiro). 'Filho do povo élfico/do homem valente'. Em Sindarin, ELEDH + IRN (descendente).",
+   rq:"ELDAR (os elfos) + ION (filho herdeiro)",rs:"ELEDH (elfo/viajante) + IRN (descendente)"},
+  {br:"Ricardo",rank:32,g:"M",q:"Haryondo",s:"Harondor",
+   etym:"Do germânico Ricohard: ric (poder, governo) + hard (forte, corajoso). Significa 'governante forte'. Ricardo Coração de Leão, rei inglês da Terceira Cruzada.",
+   logic:"Poder + solidez: HARAN (senhor/rei, poder de governar) + ONDO (pedra, firmeza inabalável). Em Sindarin, HARAN + DOR (terra, domínio governado) = 'senhor da terra firme'.",
+   rq:"HARAN (senhor) + ONDO (pedra/firmeza)",rs:"HARAN (senhor) + DOR (terra/domínio)"},
+  {br:"Márcio",rank:33,g:"M",q:"Ohtarondo",s:"Daerond",
+   etym:"Do latim Marcius: pertencente a Marte, deus da guerra. Forma masculina de Márcia. Mês de março leva o mesmo nome.",
+   logic:"Marcial → OHTAR (guerreiro em Quenya, forma plena usada nos Númenóreanos) + ONDO (pedra/firmeza, o guerreiro que não recua). Em Sindarin, DAER + OND recria a solidez marcial.",
+   rq:"OHTAR (guerreiro) + ONDO (pedra/firmeza)",rs:"DAER (marcial) + OND (pedra)"},
+  {br:"Jorge",rank:34,g:"M",q:"Cemendur",s:"Cevorn",
+   etym:"Do grego Georgios (Γεώργιος): ge- (terra) + ergon (trabalho). Georgós = agricultor. Significa 'aquele que trabalha a terra'. São Jorge, mártir e cavaleiro.",
+   logic:"Terra + trabalho → CEM- (terra em Quenya, raiz de Yavanna deusa da terra) + DUR (servo/trabalhador fiel). Em Sindarin, CEV (terra cultivada) + ORN (árvore, símbolo do cultivo paciente).",
+   rq:"CEM (terra) + DUR (trabalhador fiel)",rs:"CEV (terra) + ORN (árvore cultivada)"},
+  {br:"Sebastião",rank:35,g:"M",q:"Oromëondo",s:"Romborn",
+   etym:"Do grego Sebastós: sebastós (venerável, augusto, digno de reverência). Nome dado a Augusto César. São Sebastião, mártir romano.",
+   logic:"Venerável/augusto → OROMË (o Vala caçador, cuja caçada é venerada) + ONDO (pedra/solidez da reverência). Em Sindarin, ROM (rumor/fama do venável) + BORN (vigoroso, digno).",
+   rq:"OROMË (o venerável Vala) + ONDO (pedra/solidez)",rs:"ROM (fama) + BORN (vigoroso)"},
+  {br:"Alexandre",rank:36,g:"M",q:"Turambar",s:"Turgon",
+   etym:"Do grego Aléxandros (Ἀλέξανδρος): álexo (proteger, afastar o inimigo) + anér/andrós (homem). Significa 'protetor dos homens'. Alexandre Magno.",
+   logic:"Proteção soberana → TUR- (domínio, poder de governar e proteger — raiz de Turambar 'Mestre do Destino') + AMBAR (mundo, destino). Em Sindarin, TUR + GON (senhor de pedra) = Turgon, rei de Gondolin.",
+   rq:"TUR (domínio) + AMBAR (destino/mundo)",rs:"TUR (poder) + GON (senhor)"},
+  {br:"Roberto",rank:37,g:"M",q:"Glorondo",s:"Gloron",
+   etym:"Do germânico Hrodebert: hrod (glória, fama) + beraht (brilhante, luminoso). Significa 'brilhantemente famoso'. Roberto Guiscardo, Duque da Normandia.",
+   logic:"Glória brilhante → GLOR- (glória/ouro em Quenya) + ONDO (pedra sólida, permanência da fama através do tempo). Em Sindarin, GLOR + ON = 'aquele da glória duradoura'.",
+   rq:"GLOR (glória/ouro) + ONDO (permanência)",rs:"GLOR (glória) + ON (sufixo)"},
+  {br:"Édson",rank:38,g:"M",q:"Calionor",s:"Calion",
+   etym:"Do inglês Edson: son of Ed (filho de Eduardo ou Edgar). Edgar do germânico ead + gar (lança). Édson, filho de 'guardião da riqueza' com 'lança'.",
+   logic:"Filho da luz e da guarda → CAL- (luz) + ION (filho herdeiro em Quenya) + OR (agente). CALION é atestado em Tolkien como 'filho da luz' — nome dos Númenóreanos nobres.",
+   rq:"CAL (luz) + ION (filho herdeiro) + OR",rs:"CALION (filho da luz — atestado)"},
+  {br:"Diego",rank:39,g:"M",q:"Iacobindor",s:"Iacovorn",
+   etym:"Contração espanhola de Santiago (Sant Iago = São Tiago = São Jacó). Mesma raiz hebraica de Tiago — Yaakov, 'o que segue de perto'.",
+   logic:"Mesma origem que Tiago, com camada espanhola adicional → IACOB + INDOR (senhor interior, a dimensão espanhola da nobreza). Em Sindarin, IACOV + ORN recupera a raiz com estabilidade.",
+   rq:"IACOB (raiz hebraica) + INDOR (senhor interior)",rs:"IACOV + ORN (estabilidade)"},
+  {br:"Vítor",rank:40,g:"M",q:"Vanquistë",s:"Dagor",
+   etym:"Do latim Victor: vincere (vencer). Significa 'o vencedor', 'o que conquistou'. Nome cristão associado à vitória sobre o mal e sobre si mesmo.",
+   logic:"Vitória → VANQ- (raiz Q. de conquista, relacionada a VANCA) + ISTË (conhecimento/realização da vitória). Em Sindarin, DAGOR (batalha, mas 'vitória da batalha' no contexto dos grandes Dagorlad).",
+   rq:"VANQ (conquista) + ISTË (realização)",rs:"DAGOR (batalha/vitória)"},
+  {br:"Sérgio",rank:41,g:"M",q:"Turúmindo",s:"Turmind",
+   etym:"Do latim Sergius: nome de família romana de possível origem etrusca. Associado à palavra latina servire (servir) na tradição popular. São Sérgio, mártir.",
+   logic:"Servidor firme → TURU- (força/vigor) + MINDO (torre isolada, aquele que persiste em seu posto). Em Sindarin, TUR + MIND (torre firme) recria o sentido do servidor inabalável.",
+   rq:"TURU (força) + MINDO (torre isolada)",rs:"TUR (força) + MIND (torre firme)"},
+  {br:"Cláudio",rank:42,g:"M",q:"Tyalcáno",s:"Tyalcaun",
+   etym:"Do latim Claudius: nome de família romana ligado a claudus (coxo). A gens Cláudia foi uma das mais influentes de Roma. Imperador Cláudio.",
+   logic:"Habilidade sobre limitação física → TYAL- (jogo, arte, habilidade em Quenya — raiz de Tyalvaner, os artistas) + CÁNO (líder audaz). A limitação que vira virtuosidade. Em Sindarin, TYALCAUN.",
+   rq:"TYAL (arte/jogo) + CÁNO (líder audaz)",rs:"TYAL (arte) + CAUN (príncipe)"},
+  {br:"Thiago",rank:44,g:"M",q:"Iacobor",s:"Iacob",
+   etym:"Variante de Tiago. Do hebraico Yaakov, 'aquele que segue de perto'. Grafia com Th- é a forma mais arcaizante, popular no Brasil.",
+   logic:"Idêntico a Tiago: IACOB (transliteração honesta da raiz bíblica) + OR. A variante gráfica não altera a etimologia. Em Sindarin a forma permanece IACOB.",
+   rq:"IACOB (raiz hebraica) + OR (agente)",rs:"IACOB (transliteração)"},
+  {br:"Geraldo",rank:45,g:"M",q:"Aearaldor",s:"Aeraldorn",
+   etym:"Do germânico Gerwald: ger (lança) + wald (governar, senhor da floresta). Significa 'aquele que governa com a lança', 'senhor guerreiro'.",
+   logic:"Lança + governo → AEAR- (mar/destino amplo, a lança que alcança longe) + ALDOR (senhor/patriarca em Quenya). Em Sindarin, AER (sagrado/amplo) + ALDORN (senhor da floresta governante).",
+   rq:"AEAR (alcance amplo) + ALDOR (senhor/patriarca)",rs:"AER (sagrado) + ALDORN (senhor)"},
+  {br:"Adriano",rank:46,g:"M",q:"Eärindë",s:"Aerondir",
+   etym:"Do latim Hadrianus: Hadria, cidade costeira norte-italiana junto ao Adriático. Significa 'do mar Adriático', 'o marítimo'. Imperador Adriano.",
+   logic:"Mar → EAR- (mar em Quenya, raiz de Eärendil 'amigo do mar'). INDË adaptado para masculino → INDO. Em Sindarin, AERON (do mar) + DIR (homem sombrio/do mar profundo).",
+   rq:"EAR (mar) + INDO (espírito/masculino)",rs:"AERON (do mar) + DIR (homem profundo)"},
+  {br:"Luciano",rank:47,g:"M",q:"Calarondo",s:"Calornd",
+   etym:"Do latim Lucianus: de Lucius/lux (luz). Forma estendida de Lucas. Luciano de Samósata, escritor grego satirista do século II.",
+   logic:"Luz estendida → CAL- (luz) + ARONDO (grande herdeiro luminoso, -ARONDO é forma nobre de descendência). Em Sindarin, CAL + ORND (filho da luz, forma comprimida elegante).",
+   rq:"CAL (luz) + ARONDO (grande herdeiro)",rs:"CAL (luz) + ORND (filho)"},
+  {br:"Júlio",rank:48,g:"M",q:"Iúlondo",s:"Iuilon",
+   etym:"Do latim Iulius: família de Júlio César, ligada à iulus (penugem, juventude) ou ao deus Iovis/Júpiter. Evoca juventude e linhagem divina.",
+   logic:"Juventude + linhagem nobre → IÚL- (evocação fonética honesta da raiz latina) + ONDO (pedra/firmeza da linhagem). Em Sindarin, IUIL + ON mantém a sonoridade com sufixo masculino.",
+   rq:"IÚL (raiz de juventude) + ONDO (linhagem firme)",rs:"IUIL (jovem) + ON (sufixo)"},
+  {br:"Renato",rank:49,g:"M",q:"Renwëon",s:"Renion",
+   etym:"Do latim renatus: re- (de novo) + natus (nascido). Significa 'o renascido'. Forte conotação batismal cristã — o batismo como segundo nascimento.",
+   logic:"Renascimento → REN- (memória/lembrança que persiste e retorna em Quenya) + WËO (ser vivo renovado) + ON. Em Sindarin, REN (memória que retorna) + ION (filho, novo ser).",
+   rq:"REN (memória/retorno) + WËO (ser vivo)",rs:"REN (memória) + ION (novo filho)"},
+  {br:"Alex",rank:50,g:"M",q:"Turatauron",s:"Turgalad",
+   etym:"Forma abreviada de Alexandre (grego Aléxandros: álexo + anér). 'Protetor dos homens'. Forma internacional moderna e minimalista.",
+   logic:"A proteção condensada → TUR- (domínio protetor) + ATAURO (espírito duplo, intensidade) + ON. Em Sindarin, TUR + GALAD (luz estelar, a proteção que ilumina) = nome de dupla valência.",
+   rq:"TUR (domínio) + ATAURO (espírito duplo)",rs:"TUR (poder) + GALAD (luz/proteção)"},
+
+  // ── FEMININOS (top 50 IBGE Censo 2022) ──
+  {br:"Maria",rank:1,g:"F",q:"Vanyarindë",s:"Vanirel",
+   etym:"Do hebraico Miryam (מִרְיָם): origem debatida — 'amada', 'exaltada', 'senhora do mar', ou 'gota de mar'. Tradição mais aceita: 'exaltada pela divindade'. Nome da mãe de Jesus.",
+   logic:"Exaltação e graça suprema → VANYA- (belo, a mais excelsa raça Élfíca, os Vanyar) + RINDË (sufixo feminino de mestra/senhora). Em Sindarin, VAN (belo) + IREL (dama de graça singular).",
+   rq:"VANYA (beleza suprema) + RINDË (senhora)",rs:"VAN (belo) + IREL (dama graciosa)"},
+  {br:"Ana",rank:2,g:"F",q:"Annë",s:"Ann",
+   etym:"Do hebraico Hannah (חַנָּה): chen/hanan (graça, favor divino). Simplificado no mundo greco-romano para Anna. Significa 'cheia de graça', 'dádiva divina'.",
+   logic:"Raríssima convergência: ANNA em Quenya significa precisamente 'dádiva, presente' — mesma semântica que o hebraico hannah. Convergência real, não fabricada. Em Sindarin, ANN é a forma curta e elegante.",
+   rq:"ANNA (dádiva — convergência com hebraico)",rs:"ANN (dádiva, presente)"},
+  {br:"Francisca",rank:3,g:"F",q:"Ailinwissë",s:"Aelineth",
+   etym:"Feminino de Francisco. Do latim Franciscus: 'a Franca', mulher livre. Forma feminina popularizada por Santa Clara de Assis, companheira de São Francisco.",
+   logic:"Liberdade fluída feminina → AIL- (lago/liberdade) + INWISSË (essência nobre feminina). Em Sindarin, AELIN (lago) + ETH (sufixo feminino Sindarin suave).",
+   rq:"AIL (água livre) + INWISSË (essência nobre feminina)",rs:"AELIN (lago) + ETH (feminino)"},
+  {br:"Antônia",rank:4,g:"F",q:"Arafinwissë",s:"Arfineth",
+   etym:"Feminino de Antônio. Do grego Antónios, de origem etrusca. 'Valiosa, de valor inestimável'. Santa Antônia de Florença.",
+   logic:"Nobreza + habilidade no feminino: AR- + FINWISSË (feminino de FINWË, habilidade nobre). Em Sindarin, AR + FINETH recria a fórmula com sufixo feminino Sindarin.",
+   rq:"AR (nobre) + FINWISSË (habilidade feminina)",rs:"AR (nobre) + FINETH (habilidosa)"},
+  {br:"Adriana",rank:5,g:"F",q:"Eärindë",s:"Aerinel",
+   etym:"Feminino de Adriano. Do latim Hadrianus: Hadria, cidade costeira do Adriático. Significa 'do Adriático, do mar'. Evoca origem marítima.",
+   logic:"Mar → EAR- (mar em Quenya, raiz de Eärendil). -INDË é sufixo feminino clássico tolkieniano. Em Sindarin, AER (mar sagrado) + INEL (donzela, sufixo feminino elegante).",
+   rq:"EAR (mar) + INDË (feminino clássico)",rs:"AER (mar sagrado) + INEL (donzela)"},
+  {br:"Juliana",rank:6,g:"F",q:"Iúlindë",s:"Iuileth",
+   etym:"Feminino de Júlio. Do latim Iūliānus, da família de Júlio César. 'Da natureza do que é jovem', 'aquela que parece ser jovem'. Evoca frescura e leveza juvenil.",
+   logic:"Juventude e leveza → IÚL- (raiz fonética honesta da juventude latina) + INDË (sufixo feminino clássico Q.). Em Sindarin, IUIL + ETH é a adaptação fonológica mais natural.",
+   rq:"IÚL (raiz de juventude) + INDË (feminino)",rs:"IUIL (jovem) + ETH (feminino)"},
+  {br:"Márcia",rank:7,g:"F",q:"Ohtaindë",s:"Daereth",
+   etym:"Feminino de Márcio/Marcos. Do latim Marcia: pertencente a Marte, deus da guerra. 'Guerreira', 'marcial', 'aquela dedicada a Marte'.",
+   logic:"Marcial feminino → OHTA- (guerra) + INDË (feminino). Em Sindarin, DAER (grande, marcial, sombrio como Marte) + ETH (sufixo feminino Sindarin) recria a guerreira.",
+   rq:"OHTA (guerra) + INDË (feminino)",rs:"DAER (marcial) + ETH (feminino)"},
+  {br:"Fernanda",rank:8,g:"F",q:"Turucanissë",s:"Turgoniel",
+   etym:"Feminino de Fernando. Do germânico Frid-nand: paz + audácia. 'Ousada para atingir a paz', 'aquela que tem coragem para construir a paz'.",
+   logic:"Força + coragem feminina: TURU- (força) + CÁNISSË (feminino de CÁNO, líder audaz). TURGONIEL usa IEL (filha de) + Turgon, rei de Gondolin, o grande construtor da paz/fortaleza.",
+   rq:"TURU (força) + CÁNISSË (líder feminina)",rs:"TURGON + IEL (filha do rei forte)"},
+  {br:"Patrícia",rank:9,g:"F",q:"Tarissë",s:"Tariel",
+   etym:"Do latim patricia: feminino de patricius (nobre, pertencente à classe senatorial). Significa 'nobre dama', 'de classe patricia'. Santa Patrícia de Nápoles.",
+   logic:"Nobreza patricia → TÁR- (rainha/nobre em Quenya, como em Tar-Míriel rainha Númenóreana) + ISSË (essência feminina). TARIEL usa IEL (filha da realeza) em Sindarin.",
+   rq:"TÁR (rainha/nobre) + ISSË (essência)",rs:"TAR (nobre) + IEL (filha da realeza)"},
+  {br:"Aline",rank:10,g:"F",q:"Alindissë",s:"Alindeth",
+   etym:"Do latim Alina/Alyna: 'protetora nobre', 'a reluzente', 'a resplandecente'. Possivelmente ligada ao germânico Adal (nobre) ou ao latim alius (outro, singular).",
+   logic:"Nobreza luminosa → AL- (brilho/nobre) + INDISSË (sufixo feminino de esposa/dama nobre em Quenya — a forma mais elevada). Em Sindarin, ALINDETH com sufixo ETH suaviza a sonoridade.",
+   rq:"AL (brilho/nobre) + INDISSË (dama nobre)",rs:"ALIN (nobre reluzente) + DETH (feminino)"},
+  {br:"Sandra",rank:11,g:"F",q:"Turindë",s:"Turgoniel",
+   etym:"Hipocorístico de Alessandra (Alexandra): do grego álexo + anér. 'Protetora da humanidade' ou 'defensora do homem'. Sandra é a forma italiana abreviada.",
+   logic:"Proteção feminina → TUR- (domínio protetor) + INDË (feminino). A mesma família de Alexandre, reduzida ao essencial feminino. Em Sindarin, TUR + GONIEL (filha do senhor protetor).",
+   rq:"TUR (domínio protetor) + INDË (feminino)",rs:"TUR + GONIEL (filha do senhor)"},
+  {br:"Camila",rank:12,g:"F",q:"Camindë",s:"Cameth",
+   etym:"Do latim Camillus: jovem assistente nos rituais sagrados romanos. Camilla, heroína da Eneida de Virgílio, guerreira virgem dos Volscos.",
+   logic:"Serva/mensageira ritual → CAM- (mão em Quenya, a mão que serve e oferenda ao sagrado) + INDË. CAMETH usa CAM + sufixo ETH, 'portadora da mão que serve'.",
+   rq:"CAM (mão servidora) + INDË (feminino)",rs:"CAM (mão) + ETH (portadora)"},
+  {br:"Amanda",rank:13,g:"F",q:"Melmindë",s:"Meleth",
+   etym:"Do latim gerundivo amanda: 'digna de ser amada', 'que deve ser amada'. Forma passiva do verbo amare. Nome de origem latina direta.",
+   logic:"Digna de amor → MEL- (amor em Quenya, raiz de Melkor antes da queda, de MELIAN a Maia) + MINDË (aquela que se eleva digna). MELETH em Sindarin significa literalmente 'amor, o amor em si'.",
+   rq:"MEL (amor) + MINDË (digna/elevada)",rs:"MELETH (o amor em si)"},
+  {br:"Bruna",rank:14,g:"F",q:"Morindë",s:"Morfin",
+   etym:"Do germânico/nórdico Bruna: marrom, bronzeada, morena. Feminino de Bruno. Evoca a beleza sombria, a terra húmus, o tônus quente.",
+   logic:"Sombria/morena → MOR- (escuro/sombrio em Quenya, raiz de Morgoth mas também de Morwen 'donzela sombria') + INDË. MORFIN usa MOR + FIN (cabelo escuro, donzela de cabelo sombrio).",
+   rq:"MOR (sombrio/moreno) + INDË (feminino)",rs:"MOR (escuro) + FIN (cabelo/donzela)"},
+  {br:"Jéssica",rank:15,g:"F",q:"Tirissë",s:"Tirith",
+   etym:"Do hebraico Yisekāh (יִסְכָּה): 'a observadora', 'aquela que contempla'. Criado possivelmente por Shakespeare em 'O Mercador de Veneza'.",
+   logic:"A observadora → TIR- (olhar, guardar, vigiar em Quenya — raiz de Minas Tirith 'torre da guarda') + ISSË (essência feminina). TIRITH em Sindarin significa precisamente 'guarda, vigilância'.",
+   rq:"TIR (olhar/vigiar) + ISSË (essência feminina)",rs:"TIRITH (vigilância, guarda)"},
+  {br:"Letícia",rank:16,g:"F",q:"Glassindë",s:"Glasiel",
+   etym:"Do latim Laetitia: laetus (alegre, fértil, próspero). Significa 'alegria', 'felicidade', 'júbilo'. Nome de abstrato direto da língua latina.",
+   logic:"Alegria direta → GLASS- (alegria em Quenya, raiz de Glassiel nas Histórias Perdidas) + INDË. GLASIEL em Sindarin: GLAS (alegria) + IEL (portadora de alegria).",
+   rq:"GLASS (alegria) + INDË (feminino)",rs:"GLAS (alegria) + IEL (portadora)"},
+  {br:"Júlia",rank:17,g:"F",q:"Iúlindë",s:"Iuileth",
+   etym:"Feminino de Júlio. Do latim Iulia, da família de Júlio César. 'Filha de Júpiter', 'a jovem', 'macia e fofa'. Júlia, filha do imperador Augusto.",
+   logic:"Juventude feminina → IÚL- + INDË (mesma estrutura de Juliana). Sendo nome mais curto, a versão Sindarin IUILETH é mais comprimida e elegante.",
+   rq:"IÚL (juventude) + INDË (feminino)",rs:"IUIL (jovem) + ETH (feminino)"},
+  {br:"Luciana",rank:18,g:"F",q:"Calarindë",s:"Caliriel",
+   etym:"Do latim Lucianus feminino: de Lucius/lux (luz). 'Pertencente à luz', 'da natureza do iluminado'. Santa Luciana de Roma.",
+   logic:"Luz feminina → CAL- (luz) + ARINDË (grande dama luminosa, forma nobre feminina). Em Sindarin, CALIR + IEL (filha da luz radiante).",
+   rq:"CAL (luz) + ARINDË (grande dama)",rs:"CALIR (luz) + IEL (filha)"},
+  {br:"Vanessa",rank:19,g:"F",q:"Vanyëssë",s:"Vaneth",
+   etym:"Nome literário criado por Jonathan Swift em 1713 para Esther Vanhomrigh, combinando Van- do sobrenome + Essa. Evoca borboleta e beleza delicada.",
+   logic:"Beleza/graça: VANYA- (a mais bela das raças Élfas, os Vanyar) + ËSSË (ser, essência — o que ela é em si). VANETH em Sindarin: VAN (belo) + ETH (ser/essência feminina).",
+   rq:"VANYA (beleza élfica) + ËSSË (ser/essência)",rs:"VAN (belo) + ETH (ser/essência)"},
+  {br:"Mariana",rank:20,g:"F",q:"Vanyarinwë",s:"Vaneriel",
+   etym:"Fusão de Maria e Ana — 'exaltada' + 'dádiva'. Ou derivada de Marianus (pertencente a Mário). No Brasil é percebida como combinação de Maria + Ana.",
+   logic:"Dois nomes numa fórmula: VANYA (de Maria, beleza/exaltação) + RINWË (de Ana, dádiva sábia — rin é coroa + wë é ser). Em Sindarin, VAN + ER (único) + IEL.",
+   rq:"VANYA (Maria) + RINWË (Ana, dádiva/coroa)",rs:"VAN + ER (único) + IEL (feminino)"},
+  {br:"Gabriela",rank:21,g:"F",q:"Manveindë",s:"Manwiel",
+   etym:"Feminino de Gabriel. Do hebraico Gavriél: 'herói de Deus', 'mensageira divina'. A arcanjo mensageira, força de Deus em forma feminina.",
+   logic:"El → Manwë. INDË feminino. MANWIEL em Sindarin: MANWË + IEL (filha/mensageira de Manwë) — forma diretamente tolkieniana para 'enviada do rei dos Valar'.",
+   rq:"MANWË (rei Valar) + INDË (mensageira feminina)",rs:"MANWË + IEL (filha/mensageira)"},
+  {br:"Vera",rank:22,g:"F",q:"Veressë",s:"Verel",
+   etym:"Do latim vera: feminino de verus (verdadeiro, autêntico, real). Também pode ser diminutivo de Verónica. Significa 'a verdadeira', 'a autêntica'.",
+   logic:"Veracidade → VER- (raiz de fidelidade conjugal/autenticidade em Quenya, como veri, esposa fiel) + ESSË (ser, existência autêntica). VEREL usa VER + EL (estrela) — 'a estrela verdadeira'.",
+   rq:"VER (fidelidade/autenticidade) + ESSË (ser)",rs:"VER (fiel) + EL (estrela)"},
+  {br:"Vitória",rank:23,g:"F",q:"Vanquistissë",s:"Dagoriel",
+   etym:"Do latim Victoria: vincere (vencer) + -ia (sufixo feminino). A deusa romana da vitória. Significa 'a vitoriosa', 'aquela que vence'.",
+   logic:"Vitória feminina → VANQ- (raiz de conquista) + ISTISSË (feminino de realização/saber). Em Sindarin, DAGOR (batalha/vitória) + IEL (filha da vitória) compõe o nome de modo mais elegante.",
+   rq:"VANQ (conquista) + ISTISSË (realização feminina)",rs:"DAGOR (vitória) + IEL (filha)"},
+  {br:"Larissa",rank:24,g:"F",q:"Laurissë",s:"Lauriel",
+   etym:"Do grego Larissa: nome de cidade tessaliana, possivelmente de laros (agradável, festivo) ou ninfa mítica. Evoca luminosidade e alegria suave.",
+   logic:"Luminosidade agradável → LAUR- (ouro glorioso em Quenya, Laurelin a Árvore de Ouro) + ISSË. Convergência fonética real com 'Larissa'. LAURIEL em Sindarin é 'filha do ouro'.",
+   rq:"LAUR (ouro/glória — convergência fonética)",rs:"LAUR (dourado) + IEL (filha)"},
+  {br:"Cláudia",rank:25,g:"F",q:"Tyalindë",s:"Tyaleth",
+   etym:"Feminino de Cláudio. Do latim Claudia: da gens Cláudia, ligada a claudus (coxo). 'A habilidosa', associada à arte e à superação.",
+   logic:"Arte sobre limitação → TYAL- (jogo, arte, virtuosidade em Quenya) + INDË (feminino). TYALETH em Sindarin: TYAL + ETH (feminino da artista).",
+   rq:"TYAL (arte/jogo) + INDË (feminino)",rs:"TYAL (arte) + ETH (feminino)"},
+  {br:"Beatriz",rank:26,g:"F",q:"Glassindë",s:"Gelir",
+   etym:"Do latim Beatrix (de Viatrix): beatus (feliz, abençoado). 'A que traz felicidade', 'a viajante abençoada'. Beatriz, musa de Dante na Divina Comédia.",
+   logic:"Felicidade → GLASS- (alegria em Quenya) + INDË. Em Sindarin, GELIR é forma adjetivo-nome para 'alegre, que ri naturalmente' — mais sutil que glasiel, para diferenciar de Letícia.",
+   rq:"GLASS (alegria) + INDË (feminino)",rs:"GELIR (alegre, risonha)"},
+  {br:"Luana",rank:27,g:"F",q:"Luinindë",s:"Luiniel",
+   etym:"Nome de origem disputada: fusão portuguesa de Lua + Ana, ou do havaiano Luana ('feliz, à vontade'). No Brasil evoca a lua e a graça suave noturna.",
+   logic:"Lua + graça: LUIN- (azul celeste, cor da lua e do céu noturno em Quenya) + INDË. LUINIEL = 'filha do azul celeste', evoca diretamente a lua e o firmamento.",
+   rq:"LUIN (azul celeste/lua) + INDË (feminino)",rs:"LUIN (azul celeste) + IEL (filha)"},
+  {br:"Rita",rank:28,g:"F",q:"Rítissë",s:"Rithel",
+   etym:"Diminutivo de Margarida (Margherita) ou de forma abreviada. Do grego margarítēs (pérola). Santa Rita de Cássia, protetora das causas impossíveis.",
+   logic:"Pérola/preciosidade → RÍT- (evocação fonética da raiz + preciosidade) + ISSË (essência feminina). RITHEL em Sindarin: RITH (preciosa) + EL (estrela, a pérola do céu).",
+   rq:"RÍT (preciosidade) + ISSË (essência feminina)",rs:"RITH (preciosa) + EL (estrela)"},
+  {br:"Sônia",rank:29,g:"F",q:"Nómissë",s:"Idhreth",
+   etym:"Do russo Sófia via Sónya. Do grego Sophia: sophía (sabedoria, conhecimento profundo). Forma familiar eslava do nome abstrato mais poderoso do grego.",
+   logic:"Sabedoria → NÓM- (sabedoria em Quenya — raiz de Nómin, o nome Mannish de Finrod Felagund, 'o sábio') + ISSË. IDHRETH usa IDHREN (prudente/sábia em Sindarin).",
+   rq:"NÓM (sabedoria) + ISSË (essência feminina)",rs:"IDHREN (sábia) + ETH (feminino)"},
+  {br:"Renata",rank:30,g:"F",q:"Renwissë",s:"Reniel",
+   etym:"Do latim renatus: re- + natus (renascida). Forte conotação batismal — o batismo como segundo nascimento, purificação e recomeço.",
+   logic:"Renascimento feminino → REN- (memória/lembrança que retorna em Quenya) + WISSË (renovação certa, o que se sabe que virá). RENIEL: REN + IEL (filha do renascimento).",
+   rq:"REN (memória/retorno) + WISSË (renovação)",rs:"REN (lembrança) + IEL (filha)"},
+  {br:"Eliane",rank:31,g:"F",q:"Calianë",s:"Calianel",
+   etym:"Do hebraico Eliyahu feminino: El (Deus) + yah (Eru/Javé). 'Meu Deus é Eru/Javé'. Combinação com o sol → 'Sol de Eru'. Santa Eliana.",
+   logic:"Sol de Eru → CAL- (luz solar em Quenya) + IANË (forma feminina de dama/senhoria espiritual). CALIANEL combina a luz + IEL (filha da luz divina).",
+   rq:"CAL (luz solar) + IANË (senhoria espiritual)",rs:"CALIAN (luz divina) + EL (estrela)"},
+  {br:"Josefa",rank:32,g:"F",q:"Calacánissë",s:"Calagorneth",
+   etym:"Feminino de José. Do hebraico Yosef: 'Deus multiplica'. Josefa, forma feminina do nome do patriarca, popular em Portugal e no Norte do Brasil.",
+   logic:"Mesmo José com sufixo feminino: CALACÁN- + ISSË. CALAGORNETH usa o mesmo CALAGORN com ETH feminino Sindarin.",
+   rq:"CALACÁN (provisão/guia) + ISSË (feminino)",rs:"CALAGORN + ETH (feminino)"},
+  {br:"Simone",rank:33,g:"F",q:"Eruindë",s:"Eruwineth",
+   etym:"Feminino de Simão. Do hebraico Shimon: shama (ouvir) + El. 'Deus ouviu', 'aquela que foi ouvida'. Simone de Beauvoir, filósofa existencialista.",
+   logic:"Deus ouviu: ERU (o Único) + INDË (sufixo feminino de escuta atenta e receptiva). ERUWINETH usa WINETH (donzela que escuta) para suavizar a sonoridade Sindarin.",
+   rq:"ERU (o Único) + INDË (feminino atenta)",rs:"ERU + WINETH (donzela que ouve)"},
+  {br:"Natália",rank:34,g:"F",q:"Coivissë",s:"Coiviethel",
+   etym:"Do latim natalis: dies natalis (dia do nascimento de Cristo). Significa 'nascida no Natal', 'filha do nascimento sagrado'. Santa Natália de Nicomédia.",
+   logic:"Nascimento sagrado/vida → COIVI- (vida, renascimento — raiz de Coivienéni, as Águas do Despertar onde os Elfos acordaram) + SSËI. COIVIETHEL usa ETHEL (fonte/origem da vida).",
+   rq:"COIVI (vida/nascimento) + SSE (essência)",rs:"COIV (vida) + ETHEL (fonte/origem)"},
+  {br:"Cristiane",rank:35,g:"F",q:"Alyarindë",s:"Alcariel",
+   etym:"Feminino de Cristiano. Do grego Christianós: 'aquela que segue Cristo', 'a ungida'. Do hebraico Mashiach (Messias = Ungido).",
+   logic:"Sagrada/ungida → ALYA- (abençoada, próspera, consagrada em Quenya — raiz de bênção divina) + RINDË (mestra/senhora). Em Sindarin, ALCAR (glória sagrada) + IEL.",
+   rq:"ALYA (abençoada/consagrada) + RINDË (senhora)",rs:"ALCAR (glória sagrada) + IEL"},
+  {br:"Carla",rank:36,g:"F",q:"Cánissë",s:"Caneth",
+   etym:"Feminino de Carlos. Do germânico Karl: 'mulher livre', 'mulher do povo'. A dignidade da pessoa comum elevada à identidade.",
+   logic:"Livre + nobre: CÁN- (voz de liderança, a livre que comanda pela palavra) + ISSË (essência feminina). CANETH: CANN (nobre, corajosa) + ETH (sufixo feminino Sindarin).",
+   rq:"CÁN (voz/liderança) + ISSË (essência feminina)",rs:"CANN (nobre) + ETH (feminino)"},
+  {br:"Débora",rank:37,g:"F",q:"Nessindë",s:"Nessaneth",
+   etym:"Do hebraico Devorah (דְּבוֹרָה): devorá (abelha). Débora, juíza de Israel e profetisa. Símbolo de trabalho, sabedoria e liderança comunitária.",
+   logic:"Abelha/liderança → NESS- (juventude vibrante, tenrura ativa em Quenya) + INDË. NESSANETH usa NESSA (a Vala da juventude e agilidade) + ETH — a deusa jovem e laboriosa.",
+   rq:"NESS (juventude/tenrura) + INDË (feminino)",rs:"NESSA (Vala jovem) + ETH (abelha)"},
+  {br:"Rosângela",rank:38,g:"F",q:"Rossëmanvë",s:"Rossel",
+   etym:"Composto português: Rosa + Ângela. Rosa (flor) + do grego Angelos (mensageiro). 'Mensageira das rosas', anjo do jardim.",
+   logic:"Rosa + mensageira: ROSSË (chuva/orvalho de flores em Quenya, a flor como orvalho da natureza) + MANVË (mensageira de Manwë). Em Sindarin, ROSS (chuva/flor) + EL (estrela mensageira).",
+   rq:"ROSSË (flor/orvalho) + MANVË (mensageira)",rs:"ROSS (flor/orvalho) + EL (estrela)"},
+  {br:"Jaqueline",rank:39,g:"F",q:"Iacobindë",s:"Iacobeth",
+   etym:"Feminino francês de Jacques (Jacó/Tiago). Do hebraico Yaakov: 'a que segue de perto'. Forma elegante afrancesada do nome bíblico.",
+   logic:"Yaakov feminino → IACOB (transliteração da raiz bíblica) + INDË (sufixo feminino Q.). Em Sindarin, IACOB + ETH recria a forma com sonoridade mais suave.",
+   rq:"IACOB (raiz hebraica) + INDË (feminino)",rs:"IACOB + ETH (feminino)"},
+  {br:"Rosa",rank:40,g:"F",q:"Rossëindë",s:"Rossiel",
+   etym:"Do latim rosa: a flor rosa/roseira. Nome diretamente floral. Rosa de Lima, primeira santa das Américas. Evoca beleza, amor e delicadeza.",
+   logic:"Flor → ROSSË (chuva/orvalho de pétalas em Quenya — a flor como dádiva úmida da natureza) + INDË. ROSSIEL em Sindarin: ROSS (orvalho) + IEL (filha das flores).",
+   rq:"ROSSË (flor/orvalho) + INDË (feminino)",rs:"ROSS (orvalho) + IEL (filha das flores)"},
+  {br:"Daniela",rank:41,g:"F",q:"Nómindë",s:"Eruithileth",
+   etym:"Feminino de Daniel. Do hebraico Daniyél: 'Deus é meu juiz'. Forma latina-italiana popularizada na Península Ibérica.",
+   logic:"Julgamento divino feminino → NÓM- (sabedoria/julgamento) + INDË. ERUITHILETH usa ERU + ITHIL (lua, símbolo clássico de julgamento sereno) + ETH feminino.",
+   rq:"NÓM (sabedoria/julgamento) + INDË (feminino)",rs:"ERU + ITHIL (lua) + ETH"},
+  {br:"Aparecida",rank:42,g:"F",q:"Calafairissë",s:"Calafariel",
+   etym:"Do latim apparere: aparecer, surgir, manifestar-se. 'A que apareceu'. Nossa Senhora Aparecida, padroeira do Brasil, apareceu num rio em 1717.",
+   logic:"Aparição luminosa → CALA- (luz que se revela, manifesta) + FAIR- (espírito que aparece, fantasma/visão em Quenya) + ISSË. CALAFARIEL = 'filha da visão de luz'.",
+   rq:"CALA (luz que aparece) + FAIR (visão/espírito)",rs:"CALA (luz) + FARIEL (filha da visão)"},
+  {br:"Marlene",rank:43,g:"F",q:"Vanyamorindë",s:"Vanimoreth",
+   etym:"Composto de Maria + Madeleine ou Maria + Helene. 'Maria de Magdala' + 'a brilhante'. Marlene Dietrich popularizou o nome internacionalmente.",
+   logic:"Maria + Elena (luz): VANYA- (Maria/beleza) + MOR- (mor de Magdala, a transformada) + INDË. VANIMORETH em Sindarin: VAN + IMORETH (a que foi transformada pela beleza).",
+   rq:"VANYA (Maria/beleza) + MOR (Magdala/transformação)",rs:"VAN + IMORETH (transformada)"},
+  {br:"Terezinha",rank:44,g:"F",q:"Tauressindë",s:"Tauresseth",
+   etym:"Diminutivo de Teresa. Do grego Théresia: theros (verão) ou therizo (colher). 'A que colhe', 'a do verão'. Santa Teresinha do Menino Jesus.",
+   logic:"Colheita/verão diminutivo → TAUR- (floresta/abundância) + ESSINDË (essência de colheita feminina, diminutiva). TAURESSETH: TAUR + ESSETH (pequena essência colhedora).",
+   rq:"TAUR (abundância/floresta) + ESSINDË (colheita feminina)",rs:"TAUR + ESSETH (pequena colhedora)"},
+  {br:"Raimunda",rank:45,g:"F",q:"Haryandurissë",s:"Haradeth",
+   etym:"Feminino de Raimundo. Do germânico Ragnemundus: conselho + proteção. 'A sábia protetora', 'aquela que protege com sabedoria'.",
+   logic:"Conselho + proteção femininos → HARYAN- (sábia senhora) + DURISSË (feminino de servo-protetor fiel). HARADETH em Sindarin: HARAD + ETH (feminino).",
+   rq:"HARYAN (sábia senhora) + DURISSË (protetora)",rs:"HARAD (domínio) + ETH (feminino)"},
+  {br:"Andréia",rank:46,g:"F",q:"Vorindë",s:"Bregoleth",
+   etym:"Feminino de André. Do grego Andréas/andrós: 'a corajosa', 'a viril', 'a valente'. Forma italiana-portuguesa do nome.",
+   logic:"Coragem feminina → VOR- (persistência valente, fidelidade inabalável em Quenya) + INDË. BREGOLETH em Sindarin: BREG (corajosa, brava) + OLETH (que cresce em valentia).",
+   rq:"VOR (valentia persistente) + INDË (feminino)",rs:"BREG (corajosa) + OLETH (que cresce)"},
+  {br:"Fabiana",rank:47,g:"F",q:"Faivornissë",s:"Faevoreth",
+   etym:"Feminino de Fábio. Do latim Fabiana: da gens Fabia, cultivadora. 'A da família nobre cultivadora', 'aquela que trabalha a terra com dignidade'.",
+   logic:"Alma nobre cultivadora → FAI- (espírito) + VORNISSË (feminino de fidelidade enraizada à terra). FAEVORETH: FAE (espírito/alma) + VOR (fiel) + ETH.",
+   rq:"FAI (espírito) + VORNISSË (fiel enraizada)",rs:"FAE (espírito) + VOR + ETH (feminino)"},
+  {br:"Lúcia",rank:48,g:"F",q:"Calarissë",s:"Caleriel",
+   etym:"Do latim Lucia: lux/lucis (luz). 'A luminosa', 'filha da luz'. Santa Lúcia, mártir de Siracusa, padroeira dos cegos e da visão.",
+   logic:"Luz pura → CAL- (luz) + ARISSË (grande dama luminosa, forma máxima feminina Q.). CALERIEL: CAL + ER (único) + IEL (filha da luz única).",
+   rq:"CAL (luz) + ARISSË (grande dama luminosa)",rs:"CAL + ER (único) + IEL (filha)"},
+  {br:"Raquel",rank:49,g:"F",q:"Nessimë",s:"Niphredel",
+   etym:"Do hebraico Rahel (רָחֵל): 'ovelha', 'cordeira'. Nome bíblico de profunda delicadeza pastoral. Raquel, esposa amada de Jacó.",
+   logic:"Cordeira/delicadeza → NESS- (juventude, tenrura) + IME (sufixo de qualidade ativa em Quenya). NIPHREDEL é a flor branca e delicada do Sindarin — símbolo perfeito da inocência.",
+   rq:"NESS (tenrura) + IME (qualidade ativa)",rs:"NIPHREDEL (flor branca delicada)"},
+  {br:"Ângela",rank:50,g:"F",q:"Manvessë",s:"Manwiel",
+   etym:"Do grego Angelos (ἄγγελος): mensageiro, enviado. 'Mensageira', 'a que porta mensagens divinas'. Do mesmo radical de anjo.",
+   logic:"Mensageira divina → MANVË (Manwë, rei dos Valar, senhor dos mensageiros celestes) + SSËI (essência de mensageira). MANWIEL = 'filha/enviada de Manwë' — a anjo tolkieniana.",
+   rq:"MANWË (rei celeste) + SSËI (essência mensageira)",rs:"MANWË + IEL (filha/enviada)"},
+];
+
+let filter="todos", openCard=null;
+
+function setFilter(f,btn){
+  filter=f;
+  document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  openCard=null;
+  render();
+}
+
+function toggle(id){
+  openCard=openCard===id?null:id;
+  render();
+}
+
+function esc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function render(){
+  const q=document.getElementById('search').value.toLowerCase().trim();
+  let data=N;
+  if(filter!=='todos') data=data.filter(n=>n.g===filter);
+  if(q) data=data.filter(n=>
+    n.br.toLowerCase().includes(q)||
+    n.q.toLowerCase().includes(q)||
+    n.s.toLowerCase().includes(q)||
+    (n.etym||'').toLowerCase().includes(q)||
+    (n.logic||'').toLowerCase().includes(q)
+  );
+
+  const masc=N.filter(n=>n.g==='M').length;
+  const fem=N.filter(n=>n.g==='F').length;
+  document.getElementById('s-total').textContent=N.length;
+  document.getElementById('s-masc').textContent=masc;
+  document.getElementById('s-fem').textContent=fem;
+  document.getElementById('s-found').textContent=data.length;
+
+  const grid=document.getElementById('grid');
+  if(!data.length){
+    grid.innerHTML='<div class="empty"><svg style="width:28px;height:28px;margin-bottom:8px;display:block;margin-left:auto;margin-right:auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>Nenhum nome encontrado para "<em>'+esc(q)+'</em>"</div>';
+    return;
+  }
+
+  const chevronDown=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>`;
+
+  grid.innerHTML=data.map(n=>{
+    const id=n.br+n.g+n.rank;
+    const open=openCard===id;
+    return`<article class="card${open?' open':''}" onclick="toggle('${id}')" role="listitem" aria-expanded="${open}">
+  <div class="card-head">
+    <div class="card-top">
+      <div>
+        <div class="card-br">${esc(n.br)}</div>
+        <div class="card-rank">#${n.rank} ${n.g==='M'?'masc.':'fem.'} · IBGE 2022</div>
+      </div>
+      <span class="badge ${n.g==='M'?'badge-m':'badge-f'}">${n.g==='M'?'Masculino':'Feminino'}</span>
+    </div>
+    <div class="lang-row">
+      <div class="lang-block">
+        <div class="lang-label lq">✦ Quenya</div>
+        <div class="lang-name lq">${esc(n.q)}</div>
+      </div>
+      <div class="lang-block">
+        <div class="lang-label ls">◈ Sindarin</div>
+        <div class="lang-name ls">${esc(n.s)}</div>
+      </div>
+    </div>
+    <div class="expand-row">${chevronDown}${open?'Fechar':'Ver etimologia e lógica'}</div>
+  </div>
+  <div class="card-body">
+    <div class="card-body-inner">
+      <div class="detail-section">
+        <div class="detail-label">Etimologia do nome original</div>
+        <div class="detail-text">${esc(n.etym)}</div>
+      </div>
+      <div class="detail-section">
+        <div class="detail-label">Lógica de reconstrução</div>
+        <div class="detail-text">${esc(n.logic)}</div>
+      </div>
+      <div class="detail-section">
+        <div class="detail-label">Raízes utilizadas</div>
+        <div class="roots">
+          <span class="root-pill rq">${esc(n.rq)}</span>
+          <span class="root-pill rs">${esc(n.rs)}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>`;
+  }).join('');
+}
+
+render();
+</script>
+</body>
+</html>
