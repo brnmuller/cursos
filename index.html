@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materiais de Aula | Bruno Müller</title>
+
+    <style>
+
+        :root {
+            --bg: #F5F1E8;
+            --text: #2B2623;
+            --title: #1E1917;
+            --accent: #8B3A32;
+            --accent-light: #C18A45;
+            --card: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 4rem 1.5rem;
+            font-family: Georgia, serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        h1 {
+            color: var(--title);
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            margin-bottom: .5rem;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #666;
+        }
+
+        .course-card {
+            background: var(--card);
+            border: 1px solid #ddd;
+            border-top: 6px solid var(--accent);
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,.05);
+        }
+
+        h2 {
+            margin-top: 0;
+            color: var(--accent);
+        }
+
+        .downloads {
+            margin-top: 2rem;
+        }
+
+        .downloads h3 {
+            margin-bottom: 1rem;
+        }
+
+        .download-link {
+            display: inline-block;
+            text-decoration: none;
+            background: var(--accent);
+            color: white;
+            padding: .8rem 1.2rem;
+            border-radius: 6px;
+            transition: .2s;
+        }
+
+        .download-link:hover {
+            background: var(--accent-light);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 4rem;
+            color: #777;
+            font-size: .9rem;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <header>
+        <h1>Materiais de Aula</h1>
+        <p class="subtitle">
+            Recursos, bibliografia e materiais complementares dos cursos ministrados por Bruno Müller.
+        </p>
+    </header>
+
+    <section class="course-card">
+
+        <h2>Começando nas Artes — Teoria da Cor</h2>
+
+        <p>
+            Introdução aos fundamentos da teoria da cor, abordando aspectos históricos, perceptivos e práticos da utilização das cores nas artes visuais e no cotidiano.
+        </p>
+
+        <div class="downloads">
+
+            <h3>Materiais disponíveis</h3>
+
+            <a class="download-link"
+               href="LINK_DO_PDF"
+               target="_blank">
+
+                Aula 1 — Fundamentos da Cor (PDF)
+
+            </a>
+
+        </div>
+
+    </section>
+
+    <footer>
+        © 2026 Bruno Müller
+    </footer>
+
+</div>
+
+</body>
+</html>
