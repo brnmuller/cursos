@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Começando nas Artes — Teoria da Cor</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #F4F0E8;
+            --surface: #FCFBF8;
+            --ink: #2B2623;
+            --muted: #6F675E;
+            --accent: #8B3A32;
+            --accent-2: #C18A45;
+            --rule: #D4C9B7;
+            --shadow: rgba(43,38,35,.08);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background:
+                radial-gradient(circle at top right,
+                rgba(193,138,69,.08),
+                transparent 30rem),
+                var(--bg);
+
+            color: var(--ink);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+        }
+
+        .wrap {
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 4rem 1.5rem 6rem;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 3rem;
+            color: var(--muted);
+            text-decoration: none;
+            font-size: .9rem;
+        }
+
+        .back-link:hover {
+            color: var(--accent);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .eyebrow {
+            display: block;
+            text-transform: uppercase;
+            letter-spacing: .15em;
+            font-size: .75rem;
+            color: var(--accent);
+            margin-bottom: .8rem;
+        }
+
+        h1 {
+            font-family: 'DM Serif Display', serif;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 400;
+            margin: 0 0 1rem;
+            line-height: 1.1;
+        }
+
+        .description {
+            max-width: 650px;
+            margin: 0 auto;
+            color: var(--muted);
+            font-size: 1.05rem;
+        }
+
+        .ornament {
+            display: flex;
+            align-items: center;
+            margin: 3rem auto;
+            max-width: 400px;
+        }
+
+        .ornament span {
+            flex: 1;
+            height: 1px;
+            background: var(--rule);
+        }
+
+        .ornament svg {
+            margin: 0 12px;
+        }
+
+        .panel {
+            background: var(--surface);
+            border: 1px solid var(--rule);
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 8px 30px var(--shadow);
+        }
+
+        .panel h2 {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+        }
+
+        .resource-list {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .resource-link {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 1rem 1.2rem;
+
+            background: #fff;
+            border: 1px solid var(--rule);
+            border-radius: 8px;
+
+            text-decoration: none;
+            color: inherit;
+
+            transition: .2s ease;
+        }
+
+        .resource-link:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,.05);
+        }
+
+        .resource-title {
+            font-weight: 500;
+            display: block;
+            color: var(--ink);
+        }
+
+        .resource-type {
+            display: block;
+            color: var(--muted);
+            font-size: .85rem;
+            margin-top: .2rem;
+        }
+
+        .resource-icon {
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+
+        footer {
+            margin-top: 4rem;
+            text-align: center;
+            font-size: .82rem;
+            color: var(--muted);
+        }
+
+        @media (max-width: 600px) {
+
+            .panel {
+                padding: 1.5rem;
+            }
+
+            .resource-link {
+                align-items: flex-start;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="wrap">
+
+    <a class="back-link" href="index.html">
+        ← Voltar para materiais de aula
+    </a>
+
+    <header>
+
+        <span class="eyebrow">Curso</span>
+
+        <h1>Começando nas Artes — Teoria da Cor</h1>
+
+        <p class="description">
+            Três encontros para explorar mistura, contraste, harmonia e expressão cromática.
+            Os participantes experimentam materiais acessíveis e desenvolvem composições que
+            servem de base para técnicas artísticas variadas.
+        </p>
+
+    </header>
+
+    <div class="ornament" aria-hidden="true">
+        <span></span>
+
+        <svg width="14" height="14" viewBox="0 0 14 14">
+            <circle cx="7" cy="7" r="5" fill="var(--accent)"/>
+        </svg>
+
+        <svg width="14" height="14" viewBox="0 0 14 14">
+            <circle cx="7" cy="7" r="5" fill="var(--accent-2)"/>
+        </svg>
+
+        <svg width="14" height="14" viewBox="0 0 14 14">
+            <circle cx="7" cy="7" r="5" fill="#4B6A88"/>
+        </svg>
+
+        <span></span>
+    </div>
+
+    <main class="panel">
+
+        <h2>Materiais do curso</h2>
+
+        <div class="resource-list">
+
+            <a class="resource-link"
+               href="teoria-da-cor-aula-1.pdf"
+               target="_blank"
+               rel="noopener">
+
+                <div>
+                    <span class="resource-title">
+                        Aula 1 — Fundamentos da Cor
+                    </span>
+
+                    <span class="resource-type">
+                        Slides em PDF
+                    </span>
+                </div>
+
+                <span class="resource-icon">⬇</span>
+
+            </a>
+
+            <a class="resource-link"
+               href="teoria-da-cor-aula-2.pdf"
+               target="_blank"
+               rel="noopener">
+
+                <div>
+                    <span class="resource-title">
+                        Aula 2 — Contraste e Harmonia
+                    </span>
+
+                    <span class="resource-type">
+                        Slides em PDF
+                    </span>
+                </div>
+
+                <span class="resource-icon">⬇</span>
+
+            </a>
+
+        </div>
+
+    </main>
+
+    <footer>
+        © 2026 Bruno Müller
+    </footer>
+
+</div>
+
+</body>
+</html>
