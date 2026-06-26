@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materiais de Aula — Bruno Müller</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #EFEBE0;
+            --surface: #FAF8F3;
+            --ink: #2A2118;
+            --muted: #7A6F62;
+            --accent: #8B3A32;
+            --rule: #C4BAA8;
+            --shadow: rgba(42,33,24,.07);
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--ink);
+            font-family: 'Inter', system-ui, sans-serif;
+            font-size: 1rem;
+            line-height: 1.65;
+        }
+
+        .wrap {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 4rem 1.5rem 6rem;
+        }
+
+        header {
+            text-align: center;
+            padding-bottom: 3rem;
+        }
+
+        .eyebrow {
+            display: block;
+            font-size: .78rem;
+            font-weight: 500;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: .75rem;
+        }
+
+        h1 {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 400;
+            margin: 0 0 .6rem;
+            line-height: 1.15;
+        }
+
+        .tagline {
+            font-size: 1rem;
+            color: var(--muted);
+            margin: 0;
+        }
+
+        .rule-ornament {
+            display: flex;
+            align-items: center;
+            margin: 0 auto 3.5rem;
+            max-width: 340px;
+        }
+
+        .rule-ornament span {
+            flex: 1;
+            height: 1px;
+            background: var(--rule);
+        }
+
+        .rule-ornament svg {
+            flex-shrink: 0;
+            margin: 0 10px;
+            opacity: .55;
+        }
+
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(min(100%, 380px), 1fr));
+            gap: 1.5rem;
+        }
+
+        .course-card {
+            background: var(--surface);
+            border: 1px solid var(--rule);
+            border-radius: 8px;
+            padding: 2rem 2rem 1.75rem;
+            box-shadow: 0 2px 12px var(--shadow);
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            color: inherit;
+            transition: transform .18s, box-shadow .18s, border-color .18s;
+        }
+
+        .course-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent);
+            box-shadow: 0 8px 22px rgba(42,33,24,.11);
+        }
+
+        .card-tag {
+            font-size: .72rem;
+            font-weight: 500;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin: 0 0 .6rem;
+        }
+
+        .course-card h2 {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-size: 1.35rem;
+            font-weight: 400;
+            margin: 0 0 .8rem;
+            line-height: 1.3;
+        }
+
+        .course-card p {
+            font-size: .95rem;
+            color: var(--muted);
+            margin: 0 0 1.75rem;
+            flex: 1;
+        }
+
+        .card-action {
+            border-top: 1px solid var(--rule);
+            padding-top: 1.25rem;
+            font-size: .88rem;
+            font-weight: 500;
+            color: var(--accent);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 5rem;
+            font-size: .82rem;
+            color: var(--muted);
+        }
+
+        @media (max-width: 480px) {
+            .wrap {
+                padding: 2.5rem 1.25rem 4rem;
+            }
+
+            .course-card {
+                padding: 1.5rem 1.25rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .course-card {
+                transition: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<div class="wrap">
+
+    <header>
+        <span class="eyebrow">Bruno Müller</span>
+        <h1>Materiais de Aula</h1>
+        <p class="tagline">Recursos, bibliografia e slides dos cursos e oficinas.</p>
+    </header>
+
+    <div class="rule-ornament" aria-hidden="true">
+        <span></span>
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="5" y="0.5" width="6.36" height="6.36" rx=".5" transform="rotate(45 5 .5)" fill="var(--accent)"/>
+        </svg>
+        <span></span>
+    </div>
+
+    <main class="course-grid">
+
+        <a class="course-card" href="teoria-da-cor.html">
+            <p class="card-tag">Curso</p>
+            <h2>Começando nas Artes — Teoria da Cor</h2>
+            <p>
+                Três encontros para explorar mistura, contraste, harmonia e expressão cromática.
+                Os participantes experimentam materiais acessíveis e desenvolvem composições que
+                servem de base para técnicas artísticas variadas.
+            </p>
+            <div class="card-action">Acessar materiais</div>
+        </a>
+
+        <a class="course-card" href="seu-nome-em-elfico.html">
+            <p class="card-tag">Oficina</p>
+            <h2>Seu nome em élfico</h2>
+            <p>
+                Nesta oficina criativa, os participantes serão convidados a mergulhar no universo
+                da escrita élfica, explorando a arte de desenhar seus próprios nomes em um sistema
+                de escrita inspirado pelas línguas fantásticas do universo de O Senhor dos Anéis.
+            </p>
+            <div class="card-action">Acessar materiais</div>
+        </a>
+
+    </main>
+
+    <footer>
+        © 2026 Bruno Müller
+    </footer>
+
+</div>
+</body>
+</html>
