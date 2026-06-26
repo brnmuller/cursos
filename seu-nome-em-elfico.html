@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seu nome em élfico — Materiais de Aula</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #101710;
+            --surface: #182318;
+            --surface-light: #202D20;
+            --ink: #EFE9D7;
+            --muted: #B9AE92;
+            --accent: #C8A95A;
+            --accent-dark: #7F6A34;
+            --rule: rgba(200,169,90,.45);
+            --shadow: rgba(0,0,0,.28);
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at top, rgba(200,169,90,.12), transparent 34rem),
+                linear-gradient(135deg, #0B120B, var(--bg));
+            color: var(--ink);
+            font-family: 'Inter', system-ui, sans-serif;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 1rem;
+            border: 1px solid rgba(200,169,90,.22);
+            pointer-events: none;
+        }
+
+        .wrap {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 4rem 1.5rem 6rem;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: var(--muted);
+            text-decoration: none;
+            font-size: .86rem;
+            margin-bottom: 3rem;
+        }
+
+        .back-link:hover {
+            color: var(--accent);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .eyebrow {
+            display: block;
+            color: var(--accent);
+            font-size: .76rem;
+            font-weight: 500;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            margin-bottom: .85rem;
+        }
+
+        h1 {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: clamp(2.6rem, 8vw, 4.8rem);
+            font-weight: 500;
+            line-height: 1;
+            margin: 0 0 1.25rem;
+        }
+
+        .description {
+            max-width: 680px;
+            margin: 0 auto;
+            color: var(--muted);
+            font-size: 1.05rem;
+        }
+
+        .ornament {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 3rem auto;
+            max-width: 420px;
+        }
+
+        .ornament span {
+            flex: 1;
+            height: 1px;
+            background: var(--rule);
+        }
+
+        .ornament svg {
+            margin: 0 14px;
+            opacity: .85;
+        }
+
+        .panel {
+            background:
+                linear-gradient(180deg, rgba(255,255,255,.035), transparent),
+                var(--surface);
+            border: 1px solid var(--rule);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 18px 48px var(--shadow);
+        }
+
+        .panel h2 {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.8rem;
+            font-weight: 500;
+            margin: 0 0 1.5rem;
+            color: var(--ink);
+        }
+
+        .resource-list {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .resource-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 1rem 1.15rem;
+            background: var(--surface-light);
+            border: 1px solid rgba(200,169,90,.28);
+            border-radius: 8px;
+            color: var(--ink);
+            text-decoration: none;
+            transition: border-color .18s, transform .18s, background .18s;
+        }
+
+        .resource-link:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent);
+            background: #263626;
+        }
+
+        .resource-title {
+            display: block;
+            font-weight: 500;
+        }
+
+        .resource-type {
+            display: block;
+            color: var(--muted);
+            font-size: .84rem;
+            margin-top: .15rem;
+        }
+
+        .resource-link svg {
+            flex-shrink: 0;
+            color: var(--accent);
+        }
+
+        footer {
+            margin-top: 4rem;
+            text-align: center;
+            color: var(--muted);
+            font-size: .82rem;
+        }
+
+        @media (max-width: 520px) {
+            .wrap {
+                padding: 2rem 1.25rem 4rem;
+            }
+
+            body::before {
+                inset: .5rem;
+            }
+
+            .panel {
+                padding: 1.35rem;
+            }
+
+            .resource-link {
+                align-items: flex-start;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .resource-link {
+                transition: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<div class="wrap">
+
+    <a class="back-link" href="index.html">← Voltar para materiais de aula</a>
+
+    <header>
+        <span class="eyebrow">Oficina</span>
+        <h1>Seu nome em élfico</h1>
+        <p class="description">
+            Nesta oficina criativa, os participantes serão convidados a mergulhar no universo da escrita élfica,
+            explorando a arte de desenhar seus próprios nomes em um sistema de escrita inspirado pelas línguas
+            fantásticas do universo de O Senhor dos Anéis.
+        </p>
+    </header>
+
+    <div class="ornament" aria-hidden="true">
+        <span></span>
+        <svg width="44" height="18" viewBox="0 0 44 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 9C8 2 16 2 22 9C28 16 36 16 42 9" stroke="var(--accent)" stroke-width="1.2" stroke-linecap="round"/>
+            <path d="M22 2V16" stroke="var(--accent)" stroke-width="1.2" stroke-linecap="round"/>
+            <circle cx="22" cy="9" r="2.4" fill="var(--accent)"/>
+        </svg>
+        <span></span>
+    </div>
+
+    <main class="panel">
+        <h2>Materiais da oficina</h2>
+
+        <div class="resource-list">
+
+            <a class="resource-link" href="nomes-elficos.html">
+                <span>
+                    <span class="resource-title">Seu nome em élfico</span>
+                    <span class="resource-type">Página interativa</span>
+                </span>
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                    <path d="M6.5 3.5H14.5V11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    <path d="M14.2 3.8L4 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+            </a>
+
+            <a class="resource-link" href="portugues-em-tengwar.pdf" target="_blank" rel="noopener">
+                <span>
+                    <span class="resource-title">Português usando Tengwar</span>
+                    <span class="resource-type">PDF</span>
+                </span>
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                    <path d="M9 2V11M9 11L5.8 7.8M9 11L12.2 7.8M3 15H15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </a>
+
+            <a class="resource-link" href="mtpv3rc5.pdf" target="_blank" rel="noopener">
+                <span>
+                    <span class="resource-title">Modo Tengwar-Português v3RC5</span>
+                    <span class="resource-type">PDF</span>
+                </span>
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                    <path d="M9 2V11M9 11L5.8 7.8M9 11L12.2 7.8M3 15H15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </a>
+
+        </div>
+    </main>
+
+    <footer>
+        © 2026 Bruno Müller
+    </footer>
+
+</div>
+</body>
+</html>
